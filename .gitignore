@@ -13,18 +13,3 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-
-*.yaml
-!sample_config.yaml
-
-watgbridge
-*.db
-*.db-journal
-watgbridge-build/
-
-/modules/*/
-/modules/.*/
-downloads/
-imports.go
-*.log
-watgbridge.service
