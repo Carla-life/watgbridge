@@ -39,4 +39,6 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("failed to start telegram polling: %s", err))
 	}
+
+	updater.Idle()
 }

@@ -43,15 +43,19 @@ The project looks for the following configuration keys:
 | `database > postgresql` | `port` | The port on which the database is running | `uint64` | No | `-` |
 | `database > postgresql` | `user` | The username for logging in into the database | `string` | No | `-` |
 | `database > sqlite` | `path` | The path to the local database file | `string` | No | `-` |
+| `executables` | `ffmpeg` | The path to the FFmpeg executable | `string` | No | `-` |
+| `executables` | `git` | The path to the git executable | `string` | No | `-` |
+| `executables` | `go` | The path to the Golang executable | `string` | No | `-` |
 | `telegram` | `api_url` | The telegram bot API URL that you want to use.<br><br>**Note**: The official bot API has restrictions on downloading (\~20MB) and uploading (\~50MB) files. To bypass these limits, you can host your own bot API server the details for which can be found at [telegram-bot-api](https://github.com/tdlib/telegram-bot-api). **Make sure the bot API is hosted at the same server/machine as your bot.** | `string` | No | `https://api.telegram.org/` |
 | `telegram` | `bot_token` | The Telegram provided bot token for your bot account which will be used to send messages on Telegram.<br><br>You can get it from [@BotFather](https://t.me/BotFather) | `string` | Yes | `-` |
+| `telegram` | `drop_pending_updates` | Whether the pending updates from Telegram should be dropped. | `bool` | Yes | `-` |
 | `telegram` | `owner_id` | This is the telegram user ID who can control the bot and the messages from whom will be forwarded to WhatsApp. Also, some errors will also be sent to the DM of this account.<br><br>This value can be obtained by sending `/id` to [@MetaButlerBot](https://t.me/Metabutlerbot) or [@MissRose_bot](https://t.me/MissRose_bot).<br><br>**Note**: Make sure to start the bot at least once in its DM by this account because otherwise bot will not be able to send error messages to your DM. | `int64` | Yes | `-` |
 | `telegram` | `send_online_presence` | In its default behaviour, the account appears to be ghost and the last seen time is not updated on sending messages through Telegram. You can set this option to `true` so that the account shows up as online for 5 seconds on sending new messages. | `bool` | No | `false` |
 | `telegram` | `send_read_receipts` | In its default behaviour, the account appears to be ghost and the messages are not marked as read (blue ticks) even if you send new messages from Telegram to that chat. You can set this option to `true` so that all the pending messages are marked as read upon sending new messages to that chat. | `bool` | No | `false` |
 | `telegram` | `sudo_users_id` | This is to mark some other user IDs that can control the bot and send messages through it. This is helpful if you have multiple accounts. | `[]int64` | No | `[]` |
 | `telegram` | `update_commands` | This option can be set to `false` so that the commands list which appears when you type `/` in a chat with bots is not updated with commands from this project. | `bool` | No | `true` |
-| `updates` | `check_for_updates` | Setting this to `false` will stop the bot from checking for project updates automatically. | `bool` | No | `true` |
-| `updates` | `only_releases` | If set to `false` then the bot will also notify if there are new commits on GitHub but a new version release has not been made. | `bool` | No | `true` |
+| `updates` | `check_for_updates` | Setting this to `false` will stop the bot from checking for project updates automatically. | `bool` | Yes | `-` |
+| `updates` | `only_releases` | If set to `false` then the bot will also notify if there are new commits on GitHub but a new version release (with pre-built binary) has not been made. | `bool` | Yes | `-` |
 | `whatsapp > bridging` | `audios` | Setting this to `false` will stop bridging audios from WhatsApp to Telegram. | `bool` | No | `true` |
 | `whatsapp > bridging` | `contacts` | Setting this to `false` will stop bridging contacts from WhatsApp to Telegram. | `bool` | No | `true` |
 | `whatsapp > bridging` | `documents` | Setting this to `false` will stop bridging documents from WhatsApp to Telegram. | `bool` | No | `true` |
@@ -79,5 +83,5 @@ The project looks for the following configuration keys:
 | `whatsapp > login_database > postgresql` | `user` | The username for logging in into the database | `string` | No | `-` |
 | `whatsapp > login_database > sqlite` | `path` | The path to the local database file | `string` | No | `-` |
 | `whatsapp` | `session_name` | This session name will show up when you open the list of `Linked Devices` in your phone's WhatsApp mobile application. | `string` | No | `WaTgBridge` |
-| `whatsapp > sticker_metadata` | `author_name` | This is the pack author name which will be set for the stickers sent to WhatsApp from Telegram. | `string` | No | `WaTgBridge` |
-| `whatsapp > sticker_metadata` | `pack_name` | This is the pack name which will be set for the stickers sent to WhatsApp from Telegram. | `string` | No | `WaTgBridge` |
+| `whatsapp > sticker_metadata` | `author_name` | This is the pack author name which will be set for the stickers sent to WhatsApp from Telegram. (This requires the webptool `webpmux` to be installed) | `string` | No | `WaTgBridge` |
+| `whatsapp > sticker_metadata` | `pack_name` | This is the pack name which will be set for the stickers sent to WhatsApp from Telegram. (This requires the webptool `webpmux` to be installed) | `string` | No | `WaTgBridge` |
