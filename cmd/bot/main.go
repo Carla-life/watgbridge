@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
-	"github.com/akshettrj/watgbridge/pkg/config"
-	"github.com/akshettrj/watgbridge/pkg/telegram"
+	"github.com/akshettrj/watgbridge/cmd/bot/config"
+	pkg_config "github.com/akshettrj/watgbridge/pkg/config"
+	pkg_telegram "github.com/akshettrj/watgbridge/pkg/telegram"
 
 	"github.com/spf13/viper"
 )
 
 func main() {
-	err := config.LoadConfig()
+	err := pkg_config.LoadConfig()
 	if err != nil {
-		panic(fmt.Sprintf("error while loading config: %s", err))
+		log.Fatalf("error while loading config: %s", err)
 	}
 
 	var (
@@ -25,9 +27,13 @@ func main() {
 		linkPreviews = viper.GetBool("whatsapp.bridging.link_previews")
 	)
 
-	bot, updater, err := telegram.NewClient(botToken, apiURL, !linkPreviews)
+	bot, updater, err := pkg_telegram.NewClient(botToken, apiURL, !linkPreviews)
 	if err != nil {
-		panic(fmt.Sprintf("failed to create telegram client: %s", err))
+		log.Fatalf("failed to create telegram client: %s", err)
+	}
+
+	if err = config.ValidateConfig(bot); err != nil {
+		log.Fatalf("problems with your config: %s", err)
 	}
 
 	err = updater.StartPolling(bot, &ext.PollingOpts{
@@ -37,7 +43,7 @@ func main() {
 		},
 	})
 	if err != nil {
-		panic(fmt.Sprintf("failed to start telegram polling: %s", err))
+		log.Fatalf("failed to start telegram polling: %s", err)
 	}
 
 	updater.Idle()

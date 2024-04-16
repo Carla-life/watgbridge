@@ -217,6 +217,16 @@ var AllConfigOptions = slices.Concat(
 			Validator:   nil,
 		},
 		{
+			Name:        "target_chat_id",
+			Description: "This is the telegram chat ID of the supergroup where all the messages will be forwarded. It should have topics enabled and it begins with -100.<br><br>This value can be obtained by sending `/id` to the chat after adding [@MetaButlerBot](https://t.me/Metabutlerbot) or [@MissRose_bot](https://t.me/MissRose_bot) to the group and promoting them to administrator.",
+			Required:    true,
+			Mutable:     false,
+			Default:     nil,
+			Type:        reflect.TypeOf(int64(0)),
+			Hierarchy:   []string{"telegram"},
+			Validator:   NonZeroNumberValidator[int64],
+		},
+		{
 			Name:        "owner_id",
 			Description: "This is the telegram user ID who can control the bot and the messages from whom will be forwarded to WhatsApp. Also, some errors will also be sent to the DM of this account.<br><br>This value can be obtained by sending `/id` to [@MetaButlerBot](https://t.me/Metabutlerbot) or [@MissRose_bot](https://t.me/MissRose_bot).<br><br>**Note**: Make sure to start the bot at least once in its DM by this account because otherwise bot will not be able to send error messages to your DM.",
 			Required:    true,
