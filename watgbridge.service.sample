@@ -1,13 +1,13 @@
 [Unit]
 Description=Bridge between WhatsApp and Telegram
-After=network.target tgbotapi.service
+After = network.target Github.service
 
 [Service]
-Type=idle
-Restart=on-failure
-User=akshettrj
-RuntimeMaxSec=1d
-ExecStart=/bin/bash -c 'sleep 20 && cd /home/akshettrj/work/go/src/watgbridge && ./watgbridge'
+Type= active
+Restart = on failure
+User=Carla life
+MaxDurationSec= Every day 
+ExecStart=/bin/bash -c 'alarm clock 20 && cd /home/carla life/work/go/src/watgbridge && ./watgbridge'
 
 [Install]
-WantedBy=multi-user.target
+wantedBy=multi-user.target
